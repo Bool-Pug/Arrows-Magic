@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://dt1shgncrscpt"]
+
+[ext_resource type="Theme" uid="uid://du2mxjmbko1gs" path="res://Assets/UI_Theme.tres" id="1_q1dqi"]
+[ext_resource type="Script" uid="uid://3yeqgq0rnc24" path="res://Scenes/UIs/terminal_controller.gd" id="2_q8lby"]
+
+[node name="Terminal" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_q1dqi")
+script = ExtResource("2_q8lby")
+
+[node name="Padding" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -65.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_q1dqi")
+
+[node name="LineEdit" type="LineEdit" parent="Padding"]
+layout_mode = 2
+theme = ExtResource("1_q1dqi")
+max_length = 100
+context_menu_enabled = false
+emoji_menu_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+draw_control_chars = true
+caret_blink = true
+
+[connection signal="text_submitted" from="Padding/LineEdit" to="." method="_on_terminal_text_submitted"]

@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwwtba1kbywlt"]
+[gd_scene load_steps=8 format=3 uid="uid://cwwtba1kbywlt"]
 
 [ext_resource type="PackedScene" uid="uid://cyf361gloxfeh" path="res://Scenes/Composites/player.tscn" id="1_hf1ha"]
 [ext_resource type="Script" uid="uid://c3bdbr6ujhncb" path="res://Scenes/Composites/playerInput.gd" id="2_m34ki"]
 [ext_resource type="Texture2D" uid="uid://xy5a1cc17444" path="res://icon.svg" id="2_wbxth"]
+[ext_resource type="PackedScene" uid="uid://64di1cost4mk" path="res://Scenes/UIs/gameplay_ui.tscn" id="4_kwrm5"]
+[ext_resource type="PackedScene" uid="uid://dt1shgncrscpt" path="res://Scenes/UIs/terminal.tscn" id="5_r8bcl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wbxth"]
 size = Vector2(700, 120)
@@ -15,6 +17,9 @@ size = Vector2(646, 95)
 [node name="Player" parent="." instance=ExtResource("1_hf1ha")]
 script = ExtResource("2_m34ki")
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position_smoothing_speed = 1.0
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, 299)
 
@@ -25,8 +30,6 @@ shape = SubResource("RectangleShape2D_wbxth")
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
 scale = Vector2(5, 1)
 texture = ExtResource("2_wbxth")
-
-[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2(642, 165)
@@ -39,3 +42,7 @@ shape = SubResource("RectangleShape2D_m34ki")
 position = Vector2(-17, 43)
 scale = Vector2(5, 1)
 texture = ExtResource("2_wbxth")
+
+[node name="GameplayUI" parent="." instance=ExtResource("4_kwrm5")]
+
+[node name="Terminal" parent="GameplayUI" instance=ExtResource("5_r8bcl")]

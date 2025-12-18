@@ -11,5 +11,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	basic_character_controller_component.jumpInput = Input.get_action_strength("jump") == 1
+	
+	
 	basic_character_controller_component.moveInput = Input.get_axis("move_left","move_right")
 	pass

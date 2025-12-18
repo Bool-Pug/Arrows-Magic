@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bna3isbt3sm1n"]
+
+[ext_resource type="Texture2D" uid="uid://bls1p4l2cmrsd" path="res://Assets/Projectile.png" id="1_fid8i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c3td7"]
+size = Vector2(84, 34)
+
+[node name="ProjectileSpell" type="Node2D"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+gravity_scale = 0.0
+linear_velocity = Vector2(100, 0)
+linear_damp_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+position = Vector2(1, -1)
+scale = Vector2(0.09098785, 0.09098787)
+texture = ExtResource("1_fid8i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(14, -1)
+shape = SubResource("RectangleShape2D_c3td7")

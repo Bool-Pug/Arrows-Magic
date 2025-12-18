@@ -1,24 +1,41 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwwtba1kbywlt"]
+[gd_scene load_steps=6 format=3 uid="uid://cwwtba1kbywlt"]
 
 [ext_resource type="PackedScene" uid="uid://cyf361gloxfeh" path="res://Scenes/Composites/player.tscn" id="1_hf1ha"]
+[ext_resource type="Script" uid="uid://c3bdbr6ujhncb" path="res://Scenes/Composites/playerInput.gd" id="2_m34ki"]
 [ext_resource type="Texture2D" uid="uid://xy5a1cc17444" path="res://icon.svg" id="2_wbxth"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wbxth"]
+size = Vector2(700, 120)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m34ki"]
-size = Vector2(646, 127)
+size = Vector2(646, 95)
 
 [node name="Gameplay" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_hf1ha")]
+script = ExtResource("2_m34ki")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, 299)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-5, -0.5)
-shape = SubResource("RectangleShape2D_m34ki")
+shape = SubResource("RectangleShape2D_wbxth")
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
 scale = Vector2(5, 1)
 texture = ExtResource("2_wbxth")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(642, 165)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(-14, 27)
+shape = SubResource("RectangleShape2D_m34ki")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
+position = Vector2(-17, 43)
+scale = Vector2(5, 1)
+texture = ExtResource("2_wbxth")

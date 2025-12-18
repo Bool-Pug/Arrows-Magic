@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cyf361gloxfeh"]
 
-[ext_resource type="Script" uid="uid://c3bdbr6ujhncb" path="res://Scenes/Composites/playerInput.gd" id="1_5082d"]
+[ext_resource type="Script" uid="uid://bn0em63e5ukj7" path="res://Scenes/Composites/arrowsInput.gd" id="1_5082d"]
 [ext_resource type="PackedScene" uid="uid://dk0q8qifhpj64" path="res://Scenes/Components/BasicCharacterControllerComponent.tscn" id="1_u6qrk"]
 [ext_resource type="Texture2D" uid="uid://xy5a1cc17444" path="res://icon.svg" id="2_jt2kn"]
 
@@ -11,9 +11,13 @@ size = Vector2(120, 120)
 script = ExtResource("1_5082d")
 
 [node name="BasicCharacterControllerComponent" parent="." instance=ExtResource("1_u6qrk")]
+JUMP_HEIGHT = 200
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BasicCharacterControllerComponent"]
 shape = SubResource("RectangleShape2D_jt2kn")
 
 [node name="Sprite2D" type="Sprite2D" parent="BasicCharacterControllerComponent"]
 texture = ExtResource("2_jt2kn")
+
+[node name="ArrowsController" type="Node" parent="."]
+script = ExtResource("1_5082d")

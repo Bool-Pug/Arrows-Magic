@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="magic_generic" load_steps=2 format=3 uid="uid://c4imugjhypkic"]
+
+[ext_resource type="Script" uid="uid://cjqghl1p8i5lv" path="res://Resources/Magic/magic_generic.gd" id="1_yvyhi"]
+
+[resource]
+script = ExtResource("1_yvyhi")

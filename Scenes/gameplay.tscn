@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://cwwtba1kbywlt"]
+[gd_scene load_steps=11 format=3 uid="uid://cwwtba1kbywlt"]
 
 [ext_resource type="PackedScene" uid="uid://cyf361gloxfeh" path="res://Scenes/Composites/player.tscn" id="1_hf1ha"]
 [ext_resource type="Script" uid="uid://c3bdbr6ujhncb" path="res://Scenes/Composites/playerInput.gd" id="2_m34ki"]
 [ext_resource type="Texture2D" uid="uid://xy5a1cc17444" path="res://icon.svg" id="2_wbxth"]
 [ext_resource type="PackedScene" uid="uid://64di1cost4mk" path="res://Scenes/UIs/gameplay_ui.tscn" id="4_kwrm5"]
 [ext_resource type="PackedScene" uid="uid://dt1shgncrscpt" path="res://Scenes/UIs/terminal.tscn" id="5_r8bcl"]
+[ext_resource type="Resource" uid="uid://dotht2ydbpywh" path="res://Resources/Magic/Spells/generic_spell.tres" id="6_rlidi"]
+[ext_resource type="Script" uid="uid://cjqghl1p8i5lv" path="res://Resources/Magic/magic_generic.gd" id="6_urrcd"]
+[ext_resource type="Resource" uid="uid://byio0ba32nm0t" path="res://Resources/Magic/Spells/basic_bolt.tres" id="7_puebw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wbxth"]
 size = Vector2(700, 120)
@@ -46,3 +49,9 @@ texture = ExtResource("2_wbxth")
 [node name="GameplayUI" parent="." instance=ExtResource("4_kwrm5")]
 
 [node name="Terminal" parent="GameplayUI" instance=ExtResource("5_r8bcl")]
+magic_resources = Array[ExtResource("6_urrcd")]([ExtResource("7_puebw")])
+failed_spell = ExtResource("6_rlidi")
+
+[node name="CastDelayTimer" type="Timer" parent="GameplayUI/Terminal"]
+
+[connection signal="timeout" from="GameplayUI/Terminal/CastDelayTimer" to="GameplayUI/Terminal" method="_on_cast_delay_timer_timeout"]

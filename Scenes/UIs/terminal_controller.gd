@@ -58,7 +58,7 @@ func cast_next_in_queue():
 	
 	match magic_queue[0].magic_type:
 		magic_generic.Type.SPELL:
-			cast_delay_timer.start(magic_queue[0].cast_delay / 1000)
+			cast_delay_timer.start(magic_queue[0].cast_delay / 1000.)
 			print(magic_queue[0].cast_delay)
 			magic_queue.remove_at(0)
 		magic_generic.Type.MODIFIER:

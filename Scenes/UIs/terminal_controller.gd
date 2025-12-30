@@ -56,10 +56,13 @@ func cast_next_in_queue():
 	if(magic_queue.size() == 0):
 		return
 	
+	cast_delay_timer.start(magic_queue[0].cast_delay / 1000.)
+	print(magic_queue[0].cast_delay)
+	
 	match magic_queue[0].magic_type:
+		
 		magic_generic.Type.SPELL:
-			cast_delay_timer.start(magic_queue[0].cast_delay / 1000.)
-			print(magic_queue[0].cast_delay)
+			cast_spell(magic_queue[0])
 			magic_queue.remove_at(0)
 		magic_generic.Type.MODIFIER:
 			pass
@@ -70,7 +73,9 @@ func cast_next_in_queue():
 	pass
 
 func cast_spell(spell:spell_generic):
-	print("Delaying: " + str(spell.cast_delay))
+	
+	var manifestation = spell.manifestation.instantiate()
+	get_tree().root.add_child(manifestation)
 
 
 func _on_cast_delay_timer_timeout() -> void:

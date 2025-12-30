@@ -1,19 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://cwwtba1kbywlt"]
+[gd_scene load_steps=9 format=3 uid="uid://cwwtba1kbywlt"]
 
 [ext_resource type="PackedScene" uid="uid://cyf361gloxfeh" path="res://Scenes/Composites/player.tscn" id="1_hf1ha"]
 [ext_resource type="Script" uid="uid://c3bdbr6ujhncb" path="res://Scenes/Composites/playerInput.gd" id="2_m34ki"]
-[ext_resource type="Texture2D" uid="uid://xy5a1cc17444" path="res://icon.svg" id="2_wbxth"]
 [ext_resource type="PackedScene" uid="uid://64di1cost4mk" path="res://Scenes/UIs/gameplay_ui.tscn" id="4_kwrm5"]
 [ext_resource type="PackedScene" uid="uid://dt1shgncrscpt" path="res://Scenes/UIs/terminal.tscn" id="5_r8bcl"]
 [ext_resource type="Resource" uid="uid://dotht2ydbpywh" path="res://Resources/Magic/Spells/generic_spell.tres" id="6_rlidi"]
 [ext_resource type="Script" uid="uid://cjqghl1p8i5lv" path="res://Resources/Magic/magic_generic.gd" id="6_urrcd"]
 [ext_resource type="Resource" uid="uid://byio0ba32nm0t" path="res://Resources/Magic/Spells/basic_bolt.tres" id="7_puebw"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wbxth"]
-size = Vector2(700, 120)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_m34ki"]
-size = Vector2(646, 95)
+[ext_resource type="PackedScene" uid="uid://t276di4pkbly" path="res://Scenes/Other/PlatformNinePatch.tscn" id="8_urrcd"]
 
 [node name="Gameplay" type="Node2D"]
 
@@ -23,29 +17,6 @@ script = ExtResource("2_m34ki")
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position_smoothing_speed = 1.0
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(0, 299)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-5, -0.5)
-shape = SubResource("RectangleShape2D_wbxth")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-scale = Vector2(5, 1)
-texture = ExtResource("2_wbxth")
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(642, 165)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2(-14, 27)
-shape = SubResource("RectangleShape2D_m34ki")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
-position = Vector2(-17, 43)
-scale = Vector2(5, 1)
-texture = ExtResource("2_wbxth")
-
 [node name="GameplayUI" parent="." instance=ExtResource("4_kwrm5")]
 
 [node name="Terminal" parent="GameplayUI" instance=ExtResource("5_r8bcl")]
@@ -53,5 +24,11 @@ magic_resources = Array[ExtResource("6_urrcd")]([ExtResource("7_puebw")])
 failed_spell = ExtResource("6_rlidi")
 
 [node name="CastDelayTimer" type="Timer" parent="GameplayUI/Terminal"]
+
+[node name="Platform (1)" parent="." instance=ExtResource("8_urrcd")]
+offset_left = -138.0
+offset_top = 192.0
+offset_right = 179.0
+offset_bottom = 290.0
 
 [connection signal="timeout" from="GameplayUI/Terminal/CastDelayTimer" to="GameplayUI/Terminal" method="_on_cast_delay_timer_timeout"]

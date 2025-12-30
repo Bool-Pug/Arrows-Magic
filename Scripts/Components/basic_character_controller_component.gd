@@ -7,6 +7,7 @@ extends CharacterBody2D
 @export_group("Jumping")
 @export var JUMP_HEIGHT = 100
 @export var JUMPING_GRAVITY_INTENSITY = 0.5
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 
 
@@ -31,6 +32,7 @@ func _physics_process(delta: float) -> void:
 	#var direction := Input.get_axis("ui_left", "ui_right")
 	if moveInput:
 		velocity.x = move_toward(velocity.x,moveInput*MOVE_SPEED,MOVE_ACCELERATION)
+		sprite_2d.flip_h = velocity.x<0
 	else:
 		velocity.x = move_toward(velocity.x, 0, MOVE_ACCELERATION)
 

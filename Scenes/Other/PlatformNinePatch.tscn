@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://t276di4pkbly"]
+
+[ext_resource type="Texture2D" uid="uid://dr3vuf35rexxb" path="res://Assets/NinePatchPlatformBasic.png" id="1_raur1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qeveg"]
+size = Vector2(6, 6)
+
+[node name="Platform (1)" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_qeveg")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 3.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_raur1")
+draw_center = false
+region_rect = Rect2(1, 1, 1, 1)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3

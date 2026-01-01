@@ -37,3 +37,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, MOVE_ACCELERATION)
 
 	move_and_slide()
+
+
+func _on_animation_timer_timeout() -> void:
+	pass # Replace with function body.

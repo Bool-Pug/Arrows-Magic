@@ -126,6 +126,11 @@ position_smoothing_speed = 1.0
 [node name="GameplayUI" parent="." instance=ExtResource("4_kwrm5")]
 
 [node name="Terminal" parent="GameplayUI" instance=ExtResource("5_r8bcl")]
+anchors_preset = 12
+anchor_top = 1.0
+offset_top = 0.0
+offset_right = 0.0
+grow_vertical = 0
 magic_resources = Array[ExtResource("6_urrcd")]([ExtResource("7_puebw")])
 failed_spell = ExtResource("6_rlidi")
 

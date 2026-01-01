@@ -2,6 +2,7 @@ extends Control
 
 @onready var line_edit: LineEdit = $Padding/LineEdit
 @onready var player: Node2D = $"../../Player"
+@onready var player_body:CharacterBody2D = $"../../Player/BasicCharacterControllerComponent"
 var terminal_open:bool = false
 
 @export var magic_resources:Array[magic_generic] 
@@ -76,9 +77,14 @@ func cast_next_in_queue():
 
 func cast_spell(spell:spell_generic):
 	
-	var manifestation = spell.manifestation.instantiate()
+	var manifestation:Node2D = spell.manifestation.instantiate()
 	get_tree().root.add_child(manifestation)
-
+	manifestation.global_position = player_body.global_position
+	if(player_body.flipped_direction):
+		print("flipping")
+		manifestation.rotate(PI)
+		
+		manifestation.get_child(0).velocity.x *= -1
 
 func _on_cast_delay_timer_timeout() -> void:
 	cast_next_in_queue()

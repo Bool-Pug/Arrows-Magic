@@ -15,6 +15,8 @@ var previous_y_vel:float = 0.0
 var moveInput = 0.0
 var jumpInput:bool = false
 
+var flipped_direction = false
+
 
 func _physics_process(delta: float) -> void:
 	var on_floor = is_on_floor()
@@ -46,6 +48,7 @@ func _physics_process(delta: float) -> void:
 	if moveInput:
 		velocity.x = move_toward(velocity.x,moveInput*MOVE_SPEED,MOVE_ACCELERATION)
 		sprite_2d.flip_h = velocity.x<0
+		flipped_direction = sprite_2d.flip_h
 		if(!jumpInput && (sprite_2d.animation == "landing" && sprite_2d.frame == 1) or sprite_2d.animation == "idle"):
 			
 			sprite_2d.play("walk")

@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bna3isbt3sm1n"]
+[gd_scene load_steps=7 format=3 uid="uid://bna3isbt3sm1n"]
 
 [ext_resource type="Texture2D" uid="uid://f838qoifvac3" path="res://Assets/Spritesheets/Basic_magic_bolts_spritesheet.png" id="1_6voo0"]
+[ext_resource type="PackedScene" uid="uid://cm63otkwsh4mj" path="res://Scenes/Components/damage.tscn" id="2_sc0u2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c3td7"]
 size = Vector2(16, 4)
@@ -30,7 +31,11 @@ animations = [{
 [node name="WeakBoltSpell" type="Node2D"]
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
+collision_layer = 0
+collision_mask = 5
 gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
 linear_velocity = Vector2(100, 0)
 linear_damp_mode = 1
 
@@ -40,3 +45,5 @@ shape = SubResource("RectangleShape2D_c3td7")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RigidBody2D"]
 sprite_frames = SubResource("SpriteFrames_jnqoq")
 frame_progress = 0.06206813
+
+[node name="Damage" parent="." instance=ExtResource("2_sc0u2")]

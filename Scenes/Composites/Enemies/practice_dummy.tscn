@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbjbx143o4mxp"]
+
+[ext_resource type="PackedScene" uid="uid://bsl5iwbqlvnw5" path="res://Scenes/Components/health.tscn" id="1_gnwxl"]
+[ext_resource type="Texture2D" uid="uid://bjwbq7k8jhe7s" path="res://Assets/PlayerBase.png" id="2_gkn50"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ownrm"]
+size = Vector2(6, 8)
+
+[node name="PracticeDummy" type="StaticBody2D"]
+collision_layer = 4
+
+[node name="Health" parent="." instance=ExtResource("1_gnwxl")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_gkn50")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ownrm")

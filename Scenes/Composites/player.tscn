@@ -110,6 +110,7 @@ animations = [{
 script = SubResource("GDScript_jt2kn")
 
 [node name="BasicCharacterControllerComponent" parent="." instance=ExtResource("1_u6qrk")]
+collision_layer = 2
 floor_stop_on_slope = false
 floor_max_angle = 1.0471976
 MOVE_SPEED = 40.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://cwwtba1kbywlt"]
+[gd_scene load_steps=12 format=4 uid="uid://cwwtba1kbywlt"]
 
 [ext_resource type="PackedScene" uid="uid://cyf361gloxfeh" path="res://Scenes/Composites/player.tscn" id="1_hf1ha"]
 [ext_resource type="Script" uid="uid://c3bdbr6ujhncb" path="res://Scenes/Composites/playerInput.gd" id="2_m34ki"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://dotht2ydbpywh" path="res://Resources/Magic/Spells/generic_spell.tres" id="6_rlidi"]
 [ext_resource type="Script" uid="uid://cjqghl1p8i5lv" path="res://Resources/Magic/magic_generic.gd" id="6_urrcd"]
 [ext_resource type="Resource" uid="uid://byio0ba32nm0t" path="res://Resources/Magic/Spells/weak_bolt.tres" id="7_puebw"]
+[ext_resource type="PackedScene" uid="uid://bbjbx143o4mxp" path="res://Scenes/Composites/Enemies/practice_dummy.tscn" id="9_5h7oy"]
 [ext_resource type="Texture2D" uid="uid://cevc2ar2r60t2" path="res://Assets/16x16EdgeTileset.png" id="9_puebw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5h7oy"]
@@ -134,5 +135,8 @@ magic_resources = Array[ExtResource("6_urrcd")]([ExtResource("7_puebw")])
 failed_spell = ExtResource("6_rlidi")
 
 [node name="CastDelayTimer" type="Timer" parent="GameplayUI/Terminal"]
+
+[node name="PracticeDummy" parent="." instance=ExtResource("9_5h7oy")]
+position = Vector2(14, 5)
 
 [connection signal="timeout" from="GameplayUI/Terminal/CastDelayTimer" to="GameplayUI/Terminal" method="_on_cast_delay_timer_timeout"]

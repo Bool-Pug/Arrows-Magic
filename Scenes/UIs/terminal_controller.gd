@@ -20,6 +20,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if(!terminal_open and Input.is_action_just_pressed("Terminal_Open")):
 		player.input_paused = true
+		Engine.time_scale = 0.25
 		line_edit.show()
 		line_edit.grab_focus()
 		terminal_open = true
@@ -33,6 +34,7 @@ func _on_terminal_text_submitted(new_text: String) -> void:
 	line_edit.clear()
 	line_edit.hide()
 	player.input_paused = false
+	Engine.time_scale = 1.
 	terminal_open = false
 	
 	cast_next_in_queue()

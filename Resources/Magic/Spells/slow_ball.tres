@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="spell_generic" load_steps=3 format=3 uid="uid://t4gmt1egko1y"]
+
+[ext_resource type="PackedScene" uid="uid://bna3isbt3sm1n" path="res://Scenes/Composites/Magic/weakBoltSpell.tscn" id="1_72pvh"]
+[ext_resource type="Script" uid="uid://n6wqq25vc6jj" path="res://Resources/Magic/Spells/spell_generic.gd" id="2_7e4db"]
+
+[resource]
+script = ExtResource("2_7e4db")
+damage = 10
+manifestation = ExtResource("1_72pvh")
+cast_delay = 400
+trigger_word = "ball"
+metadata/_custom_type_script = "uid://n6wqq25vc6jj"

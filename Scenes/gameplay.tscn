@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dt1shgncrscpt" path="res://Scenes/UIs/terminal.tscn" id="5_r8bcl"]
 [ext_resource type="Resource" uid="uid://dotht2ydbpywh" path="res://Resources/Magic/Spells/generic_spell.tres" id="6_rlidi"]
 [ext_resource type="Script" uid="uid://cjqghl1p8i5lv" path="res://Resources/Magic/magic_generic.gd" id="6_urrcd"]
-[ext_resource type="Resource" uid="uid://byio0ba32nm0t" path="res://Resources/Magic/Spells/basic_bolt.tres" id="7_puebw"]
+[ext_resource type="Resource" uid="uid://byio0ba32nm0t" path="res://Resources/Magic/Spells/weak_bolt.tres" id="7_puebw"]
 [ext_resource type="Texture2D" uid="uid://cevc2ar2r60t2" path="res://Assets/16x16EdgeTileset.png" id="9_puebw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5h7oy"]
@@ -117,6 +117,10 @@ sources/0 = SubResource("TileSetAtlasSource_5h7oy")
 
 [node name="Gameplay" type="Node2D"]
 
+[node name="LevelTiles" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD//wEAAAABAAMAAAAAAAEAAAACAAEAAAABAAEAAAACAAEAAAACAAEAAAADAAAAAAACAAIAAAADAAIAAAABAAIAAAABAAEAAAABAAMAAAADAAIAAAAAAAIAAAAAAAEAAAAAAAMAAAACAAIAAAD//wMAAAACAAAAAAD+/wMAAAACAAAAAAD9/wMAAAABAAIAAAD9/wIAAAADAAEAAAD9/wEAAAADAAAAAAD8/wEAAAABAAEAAAD8/wIAAAACAAIAAAD7/wIAAAABAAIAAAD7/wEAAAAAAAEAAAD7/wAAAAABAAAAAAD8/wAAAAADAAEAAAD8////AAAAAAAAAAD///7/AAADAAMAAAACAP7/AAADAAMAAAADAAAAAAABAAMAAAAEAAAAAAACAAAAAAAFAP//AAABAAAAAAAGAP//AAACAAMAAAAFAAAAAAADAAIAAAAEAP3/AAABAAMAAAAFAP3/AAACAAMAAAAIAP3/AAABAAMAAAAJAPz/AAAAAAAAAAAJAP3/AAADAAIAAAAFAPv/AAABAAIAAAAGAPr/AAADAAAAAAAHAPv/AAACAAMAAAAFAPr/AAABAAAAAAAGAPv/AAACAAIAAAA=")
+tile_set = SubResource("TileSet_ltefv")
+
 [node name="Player" parent="." instance=ExtResource("1_hf1ha")]
 script = ExtResource("2_m34ki")
 
@@ -126,18 +130,9 @@ position_smoothing_speed = 1.0
 [node name="GameplayUI" parent="." instance=ExtResource("4_kwrm5")]
 
 [node name="Terminal" parent="GameplayUI" instance=ExtResource("5_r8bcl")]
-anchors_preset = 12
-anchor_top = 1.0
-offset_top = 0.0
-offset_right = 0.0
-grow_vertical = 0
 magic_resources = Array[ExtResource("6_urrcd")]([ExtResource("7_puebw")])
 failed_spell = ExtResource("6_rlidi")
 
 [node name="CastDelayTimer" type="Timer" parent="GameplayUI/Terminal"]
-
-[node name="LevelTiles" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAD//wEAAAABAAMAAAAAAAEAAAACAAEAAAABAAEAAAACAAEAAAACAAEAAAADAAAAAAACAAIAAAADAAIAAAABAAIAAAABAAEAAAABAAMAAAADAAIAAAAAAAIAAAAAAAEAAAAAAAMAAAACAAIAAAD//wMAAAACAAAAAAD+/wMAAAACAAAAAAD9/wMAAAABAAIAAAD9/wIAAAADAAEAAAD9/wEAAAADAAAAAAD8/wEAAAABAAEAAAD8/wIAAAACAAIAAAD7/wIAAAABAAIAAAD7/wEAAAAAAAEAAAD7/wAAAAABAAAAAAD8/wAAAAADAAEAAAD8////AAAAAAAAAAD///7/AAADAAMAAAACAP7/AAADAAMAAAADAAAAAAABAAMAAAAEAAAAAAACAAAAAAAFAP//AAABAAAAAAAGAP//AAACAAMAAAAFAAAAAAADAAIAAAAEAP3/AAABAAMAAAAFAP3/AAACAAMAAAAIAP3/AAABAAMAAAAJAPz/AAAAAAAAAAAJAP3/AAADAAIAAAAFAPv/AAABAAIAAAAGAPr/AAADAAAAAAAHAPv/AAACAAMAAAAFAPr/AAABAAAAAAAGAPv/AAACAAIAAAA=")
-tile_set = SubResource("TileSet_ltefv")
 
 [connection signal="timeout" from="GameplayUI/Terminal/CastDelayTimer" to="GameplayUI/Terminal" method="_on_cast_delay_timer_timeout"]

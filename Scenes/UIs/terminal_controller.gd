@@ -79,12 +79,17 @@ func cast_spell(spell:spell_generic):
 	
 	var manifestation:Node2D = spell.manifestation.instantiate()
 	get_tree().root.add_child(manifestation)
-	manifestation.global_position = player_body.global_position
+	var flip_vector := Vector2(1,1)
+	
 	if(player_body.flipped_direction):
-		print("flipping")
-		manifestation.rotate(PI)
-		
-		manifestation.get_child(0).velocity.x *= -1
+		flip_vector = Vector2(-1,1)
+		manifestation.apply_scale(flip_vector)
+		if(manifestation is CharacterBody2D):
+			manifestation.velocity.x *= -1
+	
+	print(player.casting_point.position * flip_vector)
+	manifestation.global_position = player_body.global_position + (player.casting_point.position * flip_vector)
+	
 
 func _on_cast_delay_timer_timeout() -> void:
 	cast_next_in_queue()

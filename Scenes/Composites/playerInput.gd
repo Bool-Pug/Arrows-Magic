@@ -4,6 +4,9 @@ extends Node2D
 @onready var camera_2d: Camera2D = $Camera2D
 var input_paused: bool = false
 
+@onready var casting_point: Marker2D = $BasicCharacterControllerComponent/CastingPoint
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.

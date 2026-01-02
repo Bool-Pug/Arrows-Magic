@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="spell_generic" load_steps=3 format=3 uid="uid://dotht2ydbpywh"]
 
-[ext_resource type="PackedScene" uid="uid://dwodja6qrbabj" path="res://Scenes/Composites/Magic/orbSpell.tscn" id="1_3l7es"]
+[ext_resource type="PackedScene" uid="uid://o0ybm0gfp1r0" path="res://Scenes/Composites/Magic/failed_magic.tscn" id="1_3l7es"]
 [ext_resource type="Script" uid="uid://n6wqq25vc6jj" path="res://Resources/Magic/Spells/spell_generic.gd" id="1_wf2vk"]
 
 [resource]

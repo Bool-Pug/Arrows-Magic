@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://o0ybm0gfp1r0"]
+
+[ext_resource type="Script" uid="uid://y1se1j20lljp" path="res://Scenes/Composites/Magic/particle_deleter.gd" id="1_3sviy"]
+
+[sub_resource type="Curve" id="Curve_puebw"]
+_data = [Vector2(0, 1), 0.0, 0.35250083, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5h7oy"]
+curve = SubResource("Curve_puebw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ltefv"]
+particle_flag_disable_z = true
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = 20.199978
+gravity = Vector3(0, 9.8, 0)
+damping_max = 12.121
+alpha_curve = SubResource("CurveTexture_5h7oy")
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+one_shot = true
+explosiveness = 0.91
+process_material = SubResource("ParticleProcessMaterial_ltefv")
+script = ExtResource("1_3sviy")
+
+[connection signal="finished" from="." to="." method="delete"]

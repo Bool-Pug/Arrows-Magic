@@ -80,6 +80,9 @@ func cast_spell(spell:spell_generic):
 	var manifestation:Node2D = spell.manifestation.instantiate()
 	get_tree().root.add_child(manifestation)
 	var flip_vector := Vector2(1,1)
+	if(manifestation is CharacterBody2D):
+		manifestation.load_from_spell(spell)
+
 	
 	if(player_body.flipped_direction):
 		flip_vector = Vector2(-1,1)

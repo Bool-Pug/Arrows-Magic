@@ -1,13 +1,12 @@
 extends CharacterBody2D
 
 
-@export var linear_speed:float = 300.0
 @export var gravity_intensity:float = 1.0
-@export var direction = 1
 @onready var damage: Node = $Damage
 
-func _init() -> void:
-	velocity.x = direction * linear_speed
+func load_from_spell(spell:spell_generic):
+	velocity.x = spell.speed
+	gravity_intensity = spell.gravity_intensity
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.

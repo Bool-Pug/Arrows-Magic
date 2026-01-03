@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="trigger_spell_generic" load_steps=3 format=3 uid="uid://dedc66bn1jtvf"]
+
+[ext_resource type="Script" uid="uid://bwgde4tl3rt7t" path="res://Resources/Magic/Spells/Trigger Spells/trigger_spell_generic.gd" id="1_ef67i"]
+[ext_resource type="PackedScene" uid="uid://bna3isbt3sm1n" path="res://Scenes/Composites/Magic/weakBoltSpell.tscn" id="1_rqgm6"]
+
+[resource]
+script = ExtResource("1_ef67i")
+speed = 300.0
+manifestation = ExtResource("1_rqgm6")
+trigger_word = "trigger"
+metadata/_custom_type_script = "uid://bwgde4tl3rt7t"

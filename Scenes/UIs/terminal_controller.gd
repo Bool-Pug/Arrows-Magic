@@ -31,6 +31,7 @@ func _process(_delta: float) -> void:
 
 
 func _on_terminal_text_submitted(new_text: String) -> void:
+	magic_queue.clear()
 	parse_to_magic_queue(new_text)
 	line_edit.clear()
 	line_edit.hide()
@@ -55,22 +56,50 @@ func parse_to_magic_queue(text: String):
 		if(!found_match):
 			ungrouped_magic_queue.append(failed_spell)
 	print(words)
+	var iterations:=0
+	while (ungrouped_magic_queue.size()>0 and iterations < 100):
+		iterations += 1
+		
+		var new_group := create_first_group_in_queue(ungrouped_magic_queue)
+		for i in range(new_group.num_magics):
+			ungrouped_magic_queue.remove_at(0)
+		magic_queue.append(new_group)
 	
+func create_first_group_in_queue(queue:Array[magic_generic]) -> magic_group:
 	var additional_casts := 1
 	var temp_queue: Array[magic_generic] = []
-	for magic in ungrouped_magic_queue:
+	while queue.size() > 0:
+		var magic := queue[0]
+		if magic is trigger_spell_generic:
+			magic.trigger_group = create_first_group_in_queue(queue.slice(1,queue.size()))
+			for i in range(magic.trigger_group.num_magics,0,-1):
+				queue.remove_at(i)
 		additional_casts += magic.additional_casts
 		
 		additional_casts -= 1
 		temp_queue.append(magic)
 		if(additional_casts <= 0):
-			magic_queue.append( magic_group.new(temp_queue) )
-			temp_queue.clear()
-			additional_casts = 1
-			
-	if(temp_queue.size() > 0):
-		magic_queue.append( magic_group.new(temp_queue) )
-	print(magic_queue)
+			break
+		queue.remove_at(0)
+	return magic_group.new(temp_queue)
+	
+	#
+#func group_queue(queue:Array[magic_generic]):
+	#var additional_casts := 1
+	#var temp_queue: Array[magic_generic] = []
+	#for magic in queue:
+		#additional_casts += magic.additional_casts
+		#
+		#additional_casts -= 1
+		#temp_queue.append(magic)
+		#if(additional_casts <= 0):
+			#magic_queue.append( magic_group.new(temp_queue) )
+			#temp_queue.clear()
+			#additional_casts = 1
+			#
+	#if(temp_queue.size() > 0):
+		#magic_queue.append( magic_group.new(temp_queue) )
+	#print(magic_queue)
 	
 func cast_next_in_queue():
 	if(magic_queue.size() == 0):
@@ -105,7 +134,6 @@ func cast_spell(spell:spell_generic,group_parent:Node2D):
 		if(manifestation is CharacterBody2D):
 			manifestation.velocity.x *= -1
 	
-	print(player.casting_point.position * flip_vector)
 	manifestation.global_position = player_body.global_position + (player.casting_point.position * flip_vector)
 	
 

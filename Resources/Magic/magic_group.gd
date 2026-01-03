@@ -4,7 +4,7 @@ extends magic_generic
 @export var spells:Array[spell_generic] = []
 @export var modifiers:Array[modifier_generic] = []
 
-
+var num_magics:int = 0
 
 
 func _init(magic_queue:Array[magic_generic] = []):
@@ -18,6 +18,7 @@ func _init(magic_queue:Array[magic_generic] = []):
 				modifiers.append(magic)
 			_:
 				printerr("magic of this type is not handled")
+	num_magics = magic_queue.size()
 
 func _to_string() -> String:
 	var string := "Magic Group with Spells: "
@@ -25,7 +26,7 @@ func _to_string() -> String:
 		string += spell.trigger_word + " "
 	string += "Modifiers: "
 	for modifier in modifiers:
-		string += modifier.trigger_word
+		string += modifier.trigger_word + " "
 	return string
 	
 	

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://o0ybm0gfp1r0"]
 
-[ext_resource type="Script" uid="uid://y1se1j20lljp" path="res://Scenes/Composites/Magic/particle_deleter.gd" id="1_3sviy"]
+[ext_resource type="Script" uid="uid://y1se1j20lljp" path="res://Scripts/Components/particle_deleter.gd" id="1_3sviy"]
 
 [sub_resource type="Curve" id="Curve_puebw"]
 _data = [Vector2(0, 1), 0.0, 0.35250083, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

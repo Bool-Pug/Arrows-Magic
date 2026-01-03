@@ -1,4 +1,4 @@
-class_name spell_generic
+class_name modifier_generic
 extends magic_generic
 
 @export var damage:int = 0

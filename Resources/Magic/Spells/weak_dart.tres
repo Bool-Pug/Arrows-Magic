@@ -8,5 +8,5 @@ script = ExtResource("2_86ow0")
 damage = 3
 manifestation = ExtResource("1_d5w6s")
 cast_delay = 400
-trigger_word = "ball"
+trigger_word = "dart"
 metadata/_custom_type_script = "uid://n6wqq25vc6jj"

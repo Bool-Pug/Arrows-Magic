@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="modifier_generic" load_steps=2 format=3 uid="uid://ohmyx401054j"]
+
+[ext_resource type="Script" uid="uid://bteo0lg0iy6ke" path="res://Resources/Magic/Modifiers/modifier_generic.gd" id="1_xb74j"]
+
+[resource]
+script = ExtResource("1_xb74j")
+trigger_word = "dbl"
+additional_casts = 2
+metadata/_custom_type_script = "uid://bteo0lg0iy6ke"

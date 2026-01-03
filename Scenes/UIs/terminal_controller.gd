@@ -9,7 +9,7 @@ var terminal_open:bool = false
 @export var failed_spell:spell_generic
 @onready var cast_delay_timer: Timer = $CastDelayTimer
 
-@export var magic_queue:Array[magic_generic] = []
+@export var magic_queue:Array[magic_group] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,7 +18,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if(!terminal_open and Input.is_action_just_pressed("Terminal_Open")):
 		player.input_paused = true
 		Engine.time_scale = 0.25
@@ -44,41 +44,56 @@ func _on_terminal_text_submitted(new_text: String) -> void:
 func parse_to_magic_queue(text: String):
 	var words:PackedStringArray = text.split(" ",true)
 	var found_match:bool = false
+	var ungrouped_magic_queue:Array[magic_generic] = []
 	for word in words:
 		found_match = false
 		for magic in magic_resources:
 			if(word == magic.trigger_word):
-				magic_queue.append(magic)
+				ungrouped_magic_queue.append(magic)
 				found_match = true
 				break
 		if(!found_match):
-			magic_queue.append(failed_spell)
+			ungrouped_magic_queue.append(failed_spell)
 	print(words)
+	
+	var additional_casts := 1
+	var temp_queue: Array[magic_generic] = []
+	for magic in ungrouped_magic_queue:
+		additional_casts += magic.additional_casts
+		
+		additional_casts -= 1
+		temp_queue.append(magic)
+		if(additional_casts <= 0):
+			magic_queue.append( magic_group.new(temp_queue) )
+			temp_queue.clear()
+			additional_casts = 1
+			
+	if(temp_queue.size() > 0):
+		magic_queue.append( magic_group.new(temp_queue) )
+	print(magic_queue)
 	
 func cast_next_in_queue():
 	if(magic_queue.size() == 0):
 		return
 	
 	cast_delay_timer.start(magic_queue[0].cast_delay / 1000.)
-	print(magic_queue[0].cast_delay)
+	print(magic_queue[0].to_string())
 	
-	match magic_queue[0].magic_type:
-		
-		magic_generic.Type.SPELL:
-			cast_spell(magic_queue[0])
-			magic_queue.remove_at(0)
-		magic_generic.Type.MODIFIER:
-			pass
-		magic_generic.Type.GENERIC:
-			printerr("magic_queue[0] is of GENERIC type, which should not be used")
-		_:
-			printerr("Item 0 in magic_queue is not a handled type, it is type: " + magic_queue[0].get_class())
-	pass
+	cast_magic_group(magic_queue[0])
+	magic_queue.remove_at(0)
+	
 
-func cast_spell(spell:spell_generic):
+func cast_magic_group(group:magic_group):
+	var group_parent = Node2D.new()
+	for spell in group.spells:
+		cast_spell(spell,group_parent)
+	get_tree().root.add_child(group_parent)
+	
+
+func cast_spell(spell:spell_generic,group_parent:Node2D):
 	
 	var manifestation:Node2D = spell.manifestation.instantiate()
-	get_tree().root.add_child(manifestation)
+	group_parent.add_child(manifestation)
 	var flip_vector := Vector2(1,1)
 	if(manifestation is CharacterBody2D):
 		manifestation.load_from_spell(spell)

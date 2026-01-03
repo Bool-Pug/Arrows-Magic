@@ -9,6 +9,6 @@ damage = 2
 speed = 300.0
 manifestation = ExtResource("1_646mo")
 mana_cost = 5
-cast_delay = 400
+cast_delay = 900
 trigger_word = "bolt"
 metadata/_custom_type_script = "uid://n6wqq25vc6jj"

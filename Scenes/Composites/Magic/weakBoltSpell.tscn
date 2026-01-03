@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bna3isbt3sm1n"]
 
 [ext_resource type="Texture2D" uid="uid://f838qoifvac3" path="res://Assets/Spritesheets/Basic_magic_bolts_spritesheet.png" id="1_6voo0"]
-[ext_resource type="Script" uid="uid://6eic1iukv8ek" path="res://Scenes/Composites/Magic/projectile_motion.gd" id="1_aegnn"]
+[ext_resource type="Script" uid="uid://6eic1iukv8ek" path="res://Scripts/Components/projectile_motion.gd" id="1_aegnn"]
 [ext_resource type="PackedScene" uid="uid://cm63otkwsh4mj" path="res://Scenes/Components/damage.tscn" id="2_sc0u2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kd7fj"]
@@ -34,7 +34,6 @@ collision_layer = 0
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_aegnn")
-linear_speed = 10.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-6, 0)

@@ -10,12 +10,12 @@ extends CharacterBody2D
 @onready var sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 var was_on_floor:bool = false
-var previous_y_vel:float = 0.0
+var previous_vel:Vector2 = Vector2.ZERO
+var previous_direction = -1
 
 var moveInput = 0.0
 var jumpInput:bool = false
 
-var flipped_direction = false
 
 
 func _physics_process(delta: float) -> void:
@@ -38,7 +38,7 @@ func _physics_process(delta: float) -> void:
 	if(!on_floor && !was_on_floor && velocity.y > 0 && sprite_2d.animation == "jump"):
 		sprite_2d.play("falling")
 	elif(!was_on_floor && on_floor):
-		if( abs(previous_y_vel) > 70):
+		if( abs(previous_vel.y) > 70):
 			sprite_2d.play("landing")
 		else:
 			sprite_2d.play("idle")
@@ -47,8 +47,12 @@ func _physics_process(delta: float) -> void:
 	#var direction := Input.get_axis("ui_left", "ui_right")
 	if moveInput:
 		velocity.x = move_toward(velocity.x,moveInput*MOVE_SPEED,MOVE_ACCELERATION)
-		sprite_2d.flip_h = velocity.x<0
-		flipped_direction = sprite_2d.flip_h
+		
+		var x_vel_sign:int = sign(velocity.x)
+		if(previous_direction != x_vel_sign and x_vel_sign != 0):
+			previous_direction = x_vel_sign
+			scale.x = -1
+		#sprite_2d.flip_h = velocity.x<0
 		if(!jumpInput && (sprite_2d.animation == "landing" && sprite_2d.frame == 1) or sprite_2d.animation == "idle"):
 			
 			sprite_2d.play("walk")
@@ -58,6 +62,6 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, MOVE_ACCELERATION)
 		
 	was_on_floor = on_floor
-	previous_y_vel = velocity.y
+	previous_vel = velocity
 
 	move_and_slide()

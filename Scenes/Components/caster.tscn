@@ -1,0 +1,20 @@
+[gd_scene load_steps=9 format=3 uid="uid://ccu4biwqvw7kc"]
+
+[ext_resource type="Script" uid="uid://byffvoqjdry2a" path="res://Scenes/Composites/caster_controller.gd" id="1_umqi6"]
+[ext_resource type="Script" uid="uid://cjqghl1p8i5lv" path="res://Resources/Magic/magic_generic.gd" id="2_6boyb"]
+[ext_resource type="Resource" uid="uid://dedc66bn1jtvf" path="res://Resources/Magic/Spells/Trigger Spells/weak_trigger_bolt.tres" id="3_8tm61"]
+[ext_resource type="Resource" uid="uid://t4gmt1egko1y" path="res://Resources/Magic/Spells/slow_ball.tres" id="4_ia3uv"]
+[ext_resource type="Resource" uid="uid://byio0ba32nm0t" path="res://Resources/Magic/Spells/weak_bolt.tres" id="5_sreo0"]
+[ext_resource type="Resource" uid="uid://dcitnn1y1vtf5" path="res://Resources/Magic/Spells/weak_dart.tres" id="6_b3xv6"]
+[ext_resource type="Resource" uid="uid://ohmyx401054j" path="res://Resources/Magic/Modifiers/double_cast.tres" id="7_wor1c"]
+[ext_resource type="Resource" uid="uid://dotht2ydbpywh" path="res://Resources/Magic/Spells/generic_spell.tres" id="8_kga13"]
+
+[node name="Caster" type="Marker2D"]
+gizmo_extents = 1.9
+script = ExtResource("1_umqi6")
+magic_resources = Array[ExtResource("2_6boyb")]([ExtResource("3_8tm61"), ExtResource("4_ia3uv"), ExtResource("5_sreo0"), ExtResource("6_b3xv6"), ExtResource("7_wor1c")])
+failed_spell = ExtResource("8_kga13")
+
+[node name="CastDelayTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="CastDelayTimer" to="." method="_on_cast_delay_timer_timeout"]

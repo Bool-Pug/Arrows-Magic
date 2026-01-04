@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_86ow0")
-damage = 3
+damage = 30
 manifestation = ExtResource("1_d5w6s")
 cast_delay = 400
 trigger_word = "dart"

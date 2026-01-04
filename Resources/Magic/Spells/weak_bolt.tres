@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_s7o48")
-damage = 2
+damage = 20
 speed = 300.0
 manifestation = ExtResource("1_646mo")
 mana_cost = 5

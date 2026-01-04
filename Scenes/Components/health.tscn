@@ -2,5 +2,21 @@
 
 [ext_resource type="Script" uid="uid://oun2t0lg0sb6" path="res://Scripts/Components/health.gd" id="1_mahij"]
 
-[node name="Health" type="Node"]
+[node name="Health" type="Node2D"]
 script = ExtResource("1_mahij")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -2.0
+offset_right = 10.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 1.0
+value = 0.5
+show_percentage = false

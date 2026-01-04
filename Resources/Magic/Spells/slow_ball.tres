@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_7e4db")
-damage = 10
+damage = 50
 manifestation = ExtResource("1_72pvh")
 cast_delay = 400
 trigger_word = "ball"

@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bna3isbt3sm1n"]
+[gd_scene load_steps=9 format=3 uid="uid://bna3isbt3sm1n"]
 
 [ext_resource type="Texture2D" uid="uid://f838qoifvac3" path="res://Assets/Spritesheets/Basic_magic_bolts_spritesheet.png" id="1_6voo0"]
 [ext_resource type="Script" uid="uid://6eic1iukv8ek" path="res://Scripts/Components/projectile_motion.gd" id="1_aegnn"]
+[ext_resource type="Script" uid="uid://dffq5pkwftufx" path="res://Scripts/Components/projectile_controller.gd" id="1_l2p40"]
 [ext_resource type="PackedScene" uid="uid://cm63otkwsh4mj" path="res://Scenes/Components/damage.tscn" id="2_sc0u2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kd7fj"]
@@ -29,19 +30,22 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c3td7"]
 size = Vector2(6, 4)
 
-[node name="WeakBoltSpell" type="CharacterBody2D"]
+[node name="WeakBoltSpell" type="Node2D"]
+script = ExtResource("1_l2p40")
+
+[node name="ProjectileBody" type="CharacterBody2D" parent="."]
 collision_layer = 0
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_aegnn")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ProjectileBody"]
 position = Vector2(-6, 0)
 sprite_frames = SubResource("SpriteFrames_jnqoq")
 frame_progress = 0.06206813
 
-[node name="Damage" parent="." instance=ExtResource("2_sc0u2")]
+[node name="Damage" parent="ProjectileBody" instance=ExtResource("2_sc0u2")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProjectileBody"]
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_c3td7")

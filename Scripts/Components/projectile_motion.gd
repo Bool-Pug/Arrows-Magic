@@ -4,9 +4,7 @@ extends CharacterBody2D
 @export var gravity_intensity:float = 1.0
 @onready var damage: Node = $Damage
 
-func load_from_spell(spell:spell_generic):
-	velocity.x = spell.speed
-	gravity_intensity = spell.gravity_intensity
+
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.

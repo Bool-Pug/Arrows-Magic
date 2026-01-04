@@ -2,14 +2,9 @@ extends Control
 
 @onready var line_edit: LineEdit = $Padding/LineEdit
 @onready var player: Node2D = $"../../Player"
-@onready var player_body:CharacterBody2D = $"../../Player/BasicCharacterControllerComponent"
 var terminal_open:bool = false
+@onready var player_caster: Node2D = $"../../Player/BasicCharacterControllerComponent/Caster"
 
-@export var magic_resources:Array[magic_generic] 
-@export var failed_spell:spell_generic
-@onready var cast_delay_timer: Timer = $CastDelayTimer
-
-@export var magic_queue:Array[magic_group] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -31,111 +26,14 @@ func _process(_delta: float) -> void:
 
 
 func _on_terminal_text_submitted(new_text: String) -> void:
-	magic_queue.clear()
-	parse_to_magic_queue(new_text)
+	player_caster.magic_queue.clear()
+	player_caster.parse_to_magic_queue(new_text)
 	line_edit.clear()
 	line_edit.hide()
 	player.input_paused = false
 	Engine.time_scale = 1.
 	terminal_open = false
 	
-	cast_next_in_queue()
+	player_caster.cast_next_in_queue()
 	pass # Replace with function body.
 	
-func parse_to_magic_queue(text: String):
-	var words:PackedStringArray = text.split(" ",true)
-	var found_match:bool = false
-	var ungrouped_magic_queue:Array[magic_generic] = []
-	for word in words:
-		found_match = false
-		for magic in magic_resources:
-			if(word == magic.trigger_word):
-				ungrouped_magic_queue.append(magic)
-				found_match = true
-				break
-		if(!found_match):
-			ungrouped_magic_queue.append(failed_spell)
-	print(words)
-	var iterations:=0
-	while (ungrouped_magic_queue.size()>0 and iterations < 100):
-		iterations += 1
-		
-		var new_group := create_first_group_in_queue(ungrouped_magic_queue)
-		for i in range(new_group.num_magics):
-			ungrouped_magic_queue.remove_at(0)
-		magic_queue.append(new_group)
-	
-func create_first_group_in_queue(queue:Array[magic_generic]) -> magic_group:
-	var additional_casts := 1
-	var temp_queue: Array[magic_generic] = []
-	while queue.size() > 0:
-		var magic := queue[0]
-		if magic is trigger_spell_generic:
-			magic.trigger_group = create_first_group_in_queue(queue.slice(1,queue.size()))
-			for i in range(magic.trigger_group.num_magics,0,-1):
-				queue.remove_at(i)
-		additional_casts += magic.additional_casts
-		
-		additional_casts -= 1
-		temp_queue.append(magic)
-		if(additional_casts <= 0):
-			break
-		queue.remove_at(0)
-	return magic_group.new(temp_queue)
-	
-	#
-#func group_queue(queue:Array[magic_generic]):
-	#var additional_casts := 1
-	#var temp_queue: Array[magic_generic] = []
-	#for magic in queue:
-		#additional_casts += magic.additional_casts
-		#
-		#additional_casts -= 1
-		#temp_queue.append(magic)
-		#if(additional_casts <= 0):
-			#magic_queue.append( magic_group.new(temp_queue) )
-			#temp_queue.clear()
-			#additional_casts = 1
-			#
-	#if(temp_queue.size() > 0):
-		#magic_queue.append( magic_group.new(temp_queue) )
-	#print(magic_queue)
-	
-func cast_next_in_queue():
-	if(magic_queue.size() == 0):
-		return
-	
-	cast_delay_timer.start(magic_queue[0].cast_delay / 1000.)
-	print(magic_queue[0].to_string())
-	
-	cast_magic_group(magic_queue[0])
-	magic_queue.remove_at(0)
-	
-
-func cast_magic_group(group:magic_group):
-	var group_parent = Node2D.new()
-	for spell in group.spells:
-		cast_spell(spell,group_parent)
-	get_tree().root.add_child(group_parent)
-	
-
-func cast_spell(spell:spell_generic,group_parent:Node2D):
-	
-	var manifestation:Node2D = spell.manifestation.instantiate()
-	group_parent.add_child(manifestation)
-	var flip_vector := Vector2(1,1)
-	if(manifestation is CharacterBody2D):
-		manifestation.load_from_spell(spell)
-
-	
-	if(player_body.flipped_direction):
-		flip_vector = Vector2(-1,1)
-		manifestation.apply_scale(flip_vector)
-		if(manifestation is CharacterBody2D):
-			manifestation.velocity.x *= -1
-	
-	manifestation.global_position = player_body.global_position + (player.casting_point.position * flip_vector)
-	
-
-func _on_cast_delay_timer_timeout() -> void:
-	cast_next_in_queue()

@@ -81,15 +81,16 @@ func cast_spell(spell:spell_generic,group_parent:Node2D):
 	group_parent.add_child(manifestation)
 	var flip_vector := Vector2(1,1)
 	
-	if(manifestation is projectile_controller):
-		manifestation.spell_base = spell
+
 
 	
 	if(caster_physics_body.previous_direction < 0):
 		flip_vector = Vector2(-1,1)
 		manifestation.apply_scale(flip_vector)
-		if(manifestation is CharacterBody2D):
-			manifestation.velocity.x *= -1
+		spell.speed *= -1
+	
+	if(manifestation is projectile_controller):
+		manifestation.spell_base = spell
 	
 	manifestation.global_position = global_position
 	

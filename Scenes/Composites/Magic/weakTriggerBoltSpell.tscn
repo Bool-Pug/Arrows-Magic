@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3 uid="uid://bwwux1k042fip"]
+
+[ext_resource type="Script" uid="uid://dffq5pkwftufx" path="res://Scripts/Components/projectile_controller.gd" id="1_sds32"]
+[ext_resource type="Script" uid="uid://6eic1iukv8ek" path="res://Scripts/Components/projectile_motion.gd" id="2_yskrh"]
+[ext_resource type="Texture2D" uid="uid://f838qoifvac3" path="res://Assets/Spritesheets/Basic_magic_bolts_spritesheet.png" id="3_p7ed8"]
+[ext_resource type="PackedScene" uid="uid://cm63otkwsh4mj" path="res://Scenes/Components/damage.tscn" id="4_xrpdb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kd7fj"]
+atlas = ExtResource("3_p7ed8")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wk6fx"]
+atlas = ExtResource("3_p7ed8")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jnqoq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kd7fj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wk6fx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c3td7"]
+size = Vector2(6, 4)
+
+[node name="WeakBoltSpell" type="Node2D"]
+script = ExtResource("1_sds32")
+
+[node name="ProjectileBody" type="CharacterBody2D" parent="."]
+collision_layer = 0
+collision_mask = 5
+motion_mode = 1
+script = ExtResource("2_yskrh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ProjectileBody"]
+position = Vector2(-6, 0)
+sprite_frames = SubResource("SpriteFrames_jnqoq")
+frame_progress = 0.06206813
+
+[node name="Damage" parent="ProjectileBody" instance=ExtResource("4_xrpdb")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProjectileBody"]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_c3td7")

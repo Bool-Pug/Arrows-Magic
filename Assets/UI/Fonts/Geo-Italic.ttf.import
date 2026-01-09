@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bp8g74myh08gk"
-path="res://.godot/imported/Geo-Regular.ttf-b97472ba015d508156c0f105cbfc17c6.fontdata"
+uid="uid://dll0jql86w4mk"
+path="res://.godot/imported/Geo-Italic.ttf-6e9e82ec36f3bde186557c74d8bfe5a5.fontdata"
 
 [deps]
 
-source_file="res://Assets/Fonts/Geo-Regular.ttf"
-dest_files=["res://.godot/imported/Geo-Regular.ttf-b97472ba015d508156c0f105cbfc17c6.fontdata"]
+source_file="res://Assets/UI/Fonts/Geo-Italic.ttf"
+dest_files=["res://.godot/imported/Geo-Italic.ttf-6e9e82ec36f3bde186557c74d8bfe5a5.fontdata"]
 
 [params]
 

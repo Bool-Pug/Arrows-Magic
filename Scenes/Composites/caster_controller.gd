@@ -1,14 +1,17 @@
 extends Node2D
 
-@onready var caster_character: Node2D = $"../.."
-@onready var caster_physics_body: CharacterBody2D = $".."
 
 @export var magic_resources:Array[magic_generic] 
 @export var failed_spell:spell_generic
 @onready var cast_delay_timer: Timer = $CastDelayTimer
 
 @export var magic_queue:Array[magic_group] = []
+var direction:int = 1
 
+func _ready() -> void:
+	if magic_queue.size() > 0:
+		cast_next_in_queue()
+		queue_free()
 
 func parse_to_magic_queue(text: String):
 
@@ -84,7 +87,7 @@ func cast_spell(spell:spell_generic,group_parent:Node2D):
 
 
 	
-	if(caster_physics_body.previous_direction < 0):
+	if(direction < 0):
 		flip_vector = Vector2(-1,1)
 		manifestation.apply_scale(flip_vector)
 		spell.speed *= -1

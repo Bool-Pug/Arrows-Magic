@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://yfq80tyqajaa"
-path="res://.godot/imported/upheavtt.ttf-3a949e9acc429421858f88332d220276.fontdata"
+path="res://.godot/imported/upheavtt.ttf-b98257c6c371f085b3f33ade7e744adf.fontdata"
 
 [deps]
 
-source_file="res://Assets/Fonts/upheavtt.ttf"
-dest_files=["res://.godot/imported/upheavtt.ttf-3a949e9acc429421858f88332d220276.fontdata"]
+source_file="res://Assets/UI/Fonts/upheavtt.ttf"
+dest_files=["res://.godot/imported/upheavtt.ttf-b98257c6c371f085b3f33ade7e744adf.fontdata"]
 
 [params]
 

@@ -3,6 +3,7 @@ extends Node2D
 @onready var basic_character_controller_component: CharacterBody2D = $BasicCharacterControllerComponent
 @onready var camera_2d: Camera2D = $Camera2D
 var input_paused: bool = false
+@onready var caster: Marker2D = $BasicCharacterControllerComponent/Caster
 
 
 
@@ -20,8 +21,9 @@ func _process(delta: float) -> void:
 	else:
 		basic_character_controller_component.jumpInput = Input.get_action_strength("jump") == 1
 		basic_character_controller_component.moveInput = Input.get_axis("move_left","move_right")
+		
 	
-	
-	
+	caster.direction = basic_character_controller_component.previous_direction
+
 	camera_2d.global_position = basic_character_controller_component.global_position
 	pass

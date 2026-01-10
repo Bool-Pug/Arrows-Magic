@@ -28,7 +28,7 @@ func _exit_tree() -> void:
 		get_parent().add_child.call_deferred(caster_node)
 	
 func initialize_from_spell(spell:spell_generic):
-	print(name)
+	#print(name)
 	projectile_body.velocity.x = spell.speed
 	projectile_body.gravity_intensity = spell.gravity_intensity
 	damage.damage = spell.damage

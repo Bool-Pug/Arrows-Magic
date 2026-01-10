@@ -5,7 +5,7 @@ extends Node
 
 func _on_physics_body_2d_body_entered(body: Node) -> void:
 	var health = body.find_child("Health")
-	print(body.name)
+	#print(body.name)
 	if(health):
 		health.take_damage(damage)
 	if(node_to_destroy_on_collision):

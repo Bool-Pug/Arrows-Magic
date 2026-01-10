@@ -1,15 +1,16 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://du2mxjmbko1gs"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://du2mxjmbko1gs"]
 
-[ext_resource type="StyleBox" uid="uid://ci2ysrn1p52ha" path="res://Assets/UI/stylebox_default.tres" id="1_d4tf1"]
-[ext_resource type="StyleBox" uid="uid://d1alrjp2buq6k" path="res://Assets/UI/stylebox_disabled.tres" id="2_xavxv"]
+[ext_resource type="StyleBox" uid="uid://c7i3lmqndga7c" path="res://Assets/UI/Styleboxes/Small/stylebox_default_small.tres" id="1_8a1ek"]
+[ext_resource type="StyleBox" uid="uid://d1alrjp2buq6k" path="res://Assets/UI/Styleboxes/Default/stylebox_disabled.tres" id="2_8a1ek"]
+[ext_resource type="StyleBox" uid="uid://ci2ysrn1p52ha" path="res://Assets/UI/Styleboxes/Default/stylebox_default.tres" id="3_7a0f5"]
 [ext_resource type="FontFile" uid="uid://yfq80tyqajaa" path="res://Assets/UI/Fonts/upheavtt.ttf" id="3_8a1ek"]
-[ext_resource type="StyleBox" uid="uid://d2jaijskgxllf" path="res://Assets/UI/stylebox_bright.tres" id="3_xavxv"]
+[ext_resource type="StyleBox" uid="uid://d1omp0vvdt0h" path="res://Assets/UI/Styleboxes/Small/stylebox_bright_small.tres" id="4_xyvtj"]
 
 [resource]
 default_font = ExtResource("3_8a1ek")
 default_font_size = 14
-LineEdit/styles/focus = ExtResource("1_d4tf1")
-LineEdit/styles/normal = ExtResource("1_d4tf1")
-LineEdit/styles/read_only = ExtResource("2_xavxv")
-ProgressBar/styles/background = ExtResource("1_d4tf1")
-ProgressBar/styles/fill = ExtResource("3_xavxv")
+LineEdit/styles/focus = ExtResource("3_7a0f5")
+LineEdit/styles/normal = ExtResource("3_7a0f5")
+LineEdit/styles/read_only = ExtResource("2_8a1ek")
+ProgressBar/styles/background = ExtResource("1_8a1ek")
+ProgressBar/styles/fill = ExtResource("4_xyvtj")

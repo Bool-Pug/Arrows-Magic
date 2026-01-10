@@ -7,7 +7,7 @@ extends magic_generic
 var num_magics:int = 0
 
 
-func _init(magic_queue:Array[magic_generic] = []):
+func _init(magic_queue:Array[magic_generic] = [],num_items:int = magic_queue.size()):
 	cast_delay = 0
 	for magic in magic_queue:
 		cast_delay += magic.cast_delay
@@ -18,7 +18,8 @@ func _init(magic_queue:Array[magic_generic] = []):
 				modifiers.append(magic)
 			_:
 				printerr("magic of this type is not handled")
-	num_magics = magic_queue.size()
+	num_magics = num_items
+	
 
 func _to_string() -> String:
 	var string := "Magic Group with Spells: "

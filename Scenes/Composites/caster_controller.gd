@@ -27,7 +27,7 @@ func parse_to_magic_queue(text: String):
 				break
 		if(!found_match):
 			ungrouped_magic_queue.append(failed_spell)
-	print(words)
+	#print(words)
 	var iterations:=0
 	while (ungrouped_magic_queue.size()>0 and iterations < 100):
 		iterations += 1
@@ -43,20 +43,24 @@ func parse_to_magic_queue(text: String):
 func create_first_group_in_queue(queue:Array[magic_generic]) -> magic_group:
 	var additional_casts := 1
 	var temp_queue: Array[magic_generic] = []
+	var num_magics = 0
 	while queue.size() > 0:
 		var magic := queue[0]
 		if magic is trigger_spell_generic:
 			magic.trigger_group = create_first_group_in_queue(queue.slice(1,queue.size()))
 			for i in range(magic.trigger_group.num_magics,0,-1):
 				queue.remove_at(i)
+				num_magics += 1
+				
 		additional_casts += magic.additional_casts
-		
+		num_magics += 1
+
 		additional_casts -= 1
 		temp_queue.append(magic)
 		if(additional_casts <= 0):
 			break
 		queue.remove_at(0)
-	return magic_group.new(temp_queue)
+	return magic_group.new(temp_queue,num_magics)
 	
 	
 	
@@ -65,7 +69,7 @@ func cast_next_in_queue():
 		return
 	
 	cast_delay_timer.start(magic_queue[0].cast_delay / 1000.)
-	print(magic_queue[0].to_string())
+	#print(get_parent().name,magic_queue[0].to_string())
 	
 	cast_magic_group(magic_queue[0])
 	magic_queue.remove_at(0)

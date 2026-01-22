@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dtcyqcfgkhqtt"]
 
-[ext_resource type="Script" uid="uid://byffvoqjdry2a" path="res://Scenes/Composites/caster_controller.gd" id="1_oyxdm"]
+[ext_resource type="Script" uid="uid://byffvoqjdry2a" path="res://Scripts/Components/caster_controller.gd" id="1_oyxdm"]
 [ext_resource type="Script" uid="uid://cjqghl1p8i5lv" path="res://Resources/Magic/magic_generic.gd" id="2_i7pg3"]
 [ext_resource type="Resource" uid="uid://t4gmt1egko1y" path="res://Resources/Magic/Spells/slow_ball.tres" id="4_ifftj"]
 [ext_resource type="Resource" uid="uid://byio0ba32nm0t" path="res://Resources/Magic/Spells/weak_bolt.tres" id="5_lxf0s"]

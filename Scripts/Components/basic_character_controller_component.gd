@@ -16,7 +16,11 @@ var previous_direction = -1
 var moveInput = 0.0
 var jumpInput:bool = false
 
+var health:Node = null
 
+func _ready() -> void:
+	if find_child("Health"):
+		health = $Health
 
 func _physics_process(delta: float) -> void:
 	var on_floor = is_on_floor()
@@ -52,6 +56,9 @@ func _physics_process(delta: float) -> void:
 		if(previous_direction != x_vel_sign and x_vel_sign != 0):
 			previous_direction = x_vel_sign
 			scale.x = -1
+			if health:
+				health.rotation = PI * (-previous_direction +1) /2
+				
 		#sprite_2d.flip_h = velocity.x<0
 		if(!jumpInput && (sprite_2d.animation == "landing" && sprite_2d.frame == 1) or sprite_2d.animation == "idle"):
 			

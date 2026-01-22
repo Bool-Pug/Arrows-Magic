@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=4 uid="uid://cwwtba1kbywlt"]
+[gd_scene load_steps=10 format=4 uid="uid://cwwtba1kbywlt"]
 
 [ext_resource type="PackedScene" uid="uid://cyf361gloxfeh" path="res://Scenes/Composites/player.tscn" id="1_hf1ha"]
-[ext_resource type="Script" uid="uid://c3bdbr6ujhncb" path="res://Scenes/Composites/playerInput.gd" id="2_m34ki"]
+[ext_resource type="Script" uid="uid://c3bdbr6ujhncb" path="res://Scripts/Components/playerInput.gd" id="2_m34ki"]
 [ext_resource type="PackedScene" uid="uid://64di1cost4mk" path="res://Scenes/UIs/gameplay_ui.tscn" id="4_kwrm5"]
 [ext_resource type="PackedScene" uid="uid://dt1shgncrscpt" path="res://Scenes/UIs/terminal.tscn" id="5_r8bcl"]
+[ext_resource type="PackedScene" uid="uid://cif208jyeuexa" path="res://Scenes/Composites/Enemies/patrol_enemy.tscn" id="7_1qnfl"]
 [ext_resource type="PackedScene" uid="uid://bbjbx143o4mxp" path="res://Scenes/Composites/Enemies/practice_dummy.tscn" id="9_5h7oy"]
 [ext_resource type="Texture2D" uid="uid://cevc2ar2r60t2" path="res://Assets/16x16EdgeTileset.png" id="9_puebw"]
 
@@ -131,3 +132,6 @@ position_smoothing_speed = 1.0
 
 [node name="PracticeDummy" parent="." instance=ExtResource("9_5h7oy")]
 position = Vector2(39, -36)
+
+[node name="patrol_enemy" parent="." instance=ExtResource("7_1qnfl")]
+position = Vector2(75, -13)

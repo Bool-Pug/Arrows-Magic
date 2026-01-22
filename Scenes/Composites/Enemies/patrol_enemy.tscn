@@ -1,0 +1,136 @@
+[gd_scene load_steps=18 format=3 uid="uid://cif208jyeuexa"]
+
+[ext_resource type="PackedScene" uid="uid://dk0q8qifhpj64" path="res://Scenes/Components/BasicCharacterControllerComponent.tscn" id="1_4sqlb"]
+[ext_resource type="Script" uid="uid://bu1yulo4227r0" path="res://Scripts/Components/patrol_enemy.gd" id="1_hqxtq"]
+[ext_resource type="PackedScene" uid="uid://bsl5iwbqlvnw5" path="res://Scenes/Components/health.tscn" id="1_y5dos"]
+[ext_resource type="Texture2D" uid="uid://cdr8j33cfibt2" path="res://Assets/PlayerAnimationSheet.png" id="2_ir8fy"]
+[ext_resource type="Texture2D" uid="uid://cfxehlde0o62r" path="res://Assets/Spritesheets/patrol_enemy_spritesheet.png" id="3_j55fk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jt2kn"]
+size = Vector2(6, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6b5pp"]
+atlas = ExtResource("3_j55fk")
+region = Rect2(0, 0, 6, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2lxqh"]
+atlas = ExtResource("3_j55fk")
+region = Rect2(0, 0, 6, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d4324"]
+atlas = ExtResource("3_j55fk")
+region = Rect2(0, 8, 6, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wx0qi"]
+atlas = ExtResource("2_ir8fy")
+region = Rect2(12, 0, 6, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ilt3u"]
+atlas = ExtResource("2_ir8fy")
+region = Rect2(12, 8, 6, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_br6yf"]
+atlas = ExtResource("2_ir8fy")
+region = Rect2(12, 16, 6, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kioev"]
+atlas = ExtResource("3_j55fk")
+region = Rect2(0, 8, 6, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atrf5"]
+atlas = ExtResource("3_j55fk")
+region = Rect2(0, 0, 6, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j55fk"]
+atlas = ExtResource("3_j55fk")
+region = Rect2(0, 0, 6, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_00o7q"]
+atlas = ExtResource("3_j55fk")
+region = Rect2(0, 8, 6, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jmvko"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6b5pp")
+}],
+"loop": true,
+"name": &"falling",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2lxqh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d4324")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_wx0qi")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_ilt3u")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_br6yf")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kioev")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atrf5")
+}],
+"loop": false,
+"name": &"landing",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j55fk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_00o7q")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="patrol_enemy" type="Node2D"]
+script = ExtResource("1_hqxtq")
+
+[node name="BasicCharacterControllerComponent" parent="." instance=ExtResource("1_4sqlb")]
+scale = Vector2(-1, 1)
+collision_layer = 4
+floor_stop_on_slope = false
+floor_max_angle = 1.0471976
+MOVE_SPEED = 10.0
+JUMP_HEIGHT = 36
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BasicCharacterControllerComponent"]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_jt2kn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="BasicCharacterControllerComponent"]
+position = Vector2(0, -4)
+sprite_frames = SubResource("SpriteFrames_jmvko")
+animation = &"landing"
+
+[node name="RayCast2D" type="RayCast2D" parent="BasicCharacterControllerComponent"]
+position = Vector2(6, -10)
+target_position = Vector2(0, 20)
+
+[node name="Health" parent="BasicCharacterControllerComponent" node_paths=PackedStringArray("node_to_destroy_on_death") instance=ExtResource("1_y5dos")]
+position = Vector2(0, -12)
+node_to_destroy_on_death = NodePath("../..")

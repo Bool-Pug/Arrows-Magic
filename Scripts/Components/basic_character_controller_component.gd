@@ -34,9 +34,12 @@ func _physics_process(delta: float) -> void:
 	
 	# Handle jump.
 	if jumpInput and on_floor:
+		
 		if sprite_2d.animation != "jump":
 			sprite_2d.play("jump")
+			print("jump")
 		elif(sprite_2d.frame == 2):
+			print("jump22")
 			velocity.y = -sqrt(2*get_gravity().length()*JUMP_HEIGHT*JUMPING_GRAVITY_INTENSITY)
 
 	if(!on_floor && !was_on_floor && velocity.y > 0 && sprite_2d.animation == "jump"):
